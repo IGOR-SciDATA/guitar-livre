@@ -1,0 +1,1837 @@
+.game {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: #050505;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* VÍDEO */
+.game-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.video-disabled {
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+}
+
+.game-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.12) 35%, rgba(0,0,0,0.12) 65%, rgba(0,0,0,0.75) 100%);
+  z-index: 1;
+}
+
+/* MÚSICA */
+.song-hud {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  z-index: 20;
+  width: 330px;
+  display: flex;
+  gap: 14px;
+  padding: 14px;
+  border-radius: 16px;
+  background: rgba(8, 10, 14, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.45);
+}
+
+.song-hud img {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.song-hud > div {
+  flex: 1;
+}
+
+.song-hud strong {
+  display: block;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.song-hud span {
+  display: block;
+  color: #aaa;
+  font-size: 14px;
+}
+
+.time-bar {
+  margin-top: 12px;
+  width: 100%;
+  height: 4px;
+  background: #333;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.time-progress {
+  height: 100%;
+  background: #c735ff;
+  transition: none;
+}
+
+/* HIGHWAY */
+.highway {
+  position: absolute;
+  z-index: 10;
+  left: 50%;
+  bottom: -4%;
+  width: min(800px, 60vw);
+  height: 110%;
+  transform: translateX(-50%) perspective(900px) rotateX(12deg);
+  transform-origin: bottom center;
+  overflow: hidden;
+  filter: drop-shadow(0 18px 26px rgba(0, 0, 0, 0.7));
+}
+
+.highway-surface {
+  position: absolute;
+  inset: 0;
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse at 50% 112%, rgba(104, 38, 174, 0.28) 0%, transparent 48%),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.92) 0%, rgba(15, 12, 24, 0.7) 18%, rgba(34, 24, 48, 0.38) 50%, rgba(15, 12, 24, 0.7) 82%, rgba(0, 0, 0, 0.92) 100%),
+    linear-gradient(180deg, #08060d 0%, #15101f 48%, #050408 100%);
+  clip-path: polygon(40% 0%, 60% 0%, 100% 100%, 0% 100%);
+  overflow: hidden;
+  border-left: 3px solid rgba(218, 204, 255, 0.68);
+  border-right: 3px solid rgba(218, 204, 255, 0.68);
+  box-shadow:
+    0 0 28px rgba(0, 0, 0, 0.82),
+    0 0 18px rgba(138, 78, 224, 0.18),
+    inset 0 0 55px rgba(0, 0, 0, 0.88),
+    inset 0 0 7px rgba(238, 229, 255, 0.3);
+  contain: paint;
+}
+
+/* Camadas de acabamento do braço, sempre abaixo das notas e das guias. */
+.highway-surface::before,
+.highway-surface::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.highway-surface::before {
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,0.11), transparent 8%, transparent 92%, rgba(255,255,255,0.11)),
+    linear-gradient(90deg, transparent 0%, rgba(197, 159, 255, 0.09) 47%, rgba(255,255,255,0.18) 50%, rgba(197, 159, 255, 0.09) 53%, transparent 100%);
+  mix-blend-mode: screen;
+}
+
+.highway-surface::after {
+  inset: 0;
+  z-index: 1;
+  box-shadow:
+    inset 0 22px 30px rgba(0, 0, 0, 0.72),
+    inset 0 -12px 18px rgba(196, 139, 255, 0.14),
+    inset 28px 0 32px rgba(0, 0, 0, 0.46),
+    inset -28px 0 32px rgba(0, 0, 0, 0.46);
+}
+
+/*
+ * As artes de highway do Guitar Hero normalmente são retratos (512 x 1024).
+ * A textura é mapeada para toda a área da pista: mostra a arte inteira, sem
+ * recorte, e acompanha o trapézio/perspectiva da highway como no Clone Hero.
+ */
+.highway-custom-background {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: fill;
+  object-position: center center;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.lane-guides {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+  filter: drop-shadow(0 0 2px rgba(198, 166, 255, 0.3));
+}
+
+.lane-guides line {
+  stroke: rgba(226, 216, 255, 0.34);
+  stroke-width: 0.34;
+  vector-effect: non-scaling-stroke;
+}
+
+
+/* =========================================================
+   GAMEPLAY CANVAS — RENDERER DE ALTO DESEMPENHO
+   Todas as notas e sustains são desenhados em um único canvas.
+========================================================= */
+.gameplay-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 4;
+  pointer-events: none;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  contain: strict;
+}
+
+/* NOTAS */
+.note {
+  position: absolute;
+  width: 72px;
+  height: 42px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.95);
+  box-sizing: border-box;
+  z-index: 5;
+  transform-origin: center;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 45%, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.10) 20%, rgba(0,0,0,0.18) 65%, rgba(0,0,0,0.48) 100%);
+  filter: drop-shadow(0 0 5px rgba(255,255,255,0.75));
+  box-shadow:
+    0 0 10px var(--lane-color, #ffffff),
+    0 0 24px var(--lane-color, #ffffff),
+    0 0 42px rgba(255,255,255,0.15),
+    inset 0 2px 6px rgba(255,255,255,0.4),
+    inset 0 -3px 6px rgba(0,0,0,0.3);
+  will-change: left, top, transform;
+}
+
+.note-glow {
+  position: absolute;
+  inset: -12px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, var(--lane-color, #ffffff) 0%, rgba(255,255,255,0.15) 30%, transparent 70%);
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.note-inner {
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(ellipse at 50% 35%, rgba(255,255,255,0.38) 0%, rgba(255,255,255,0.12) 22%, rgba(0,0,0,0.12) 52%, rgba(0,0,0,0.45) 100%);
+  box-shadow: inset 0 3px 5px rgba(255,255,255,0.32), inset 0 -5px 8px rgba(0,0,0,0.42), 0 0 15px var(--lane-color, #ffffff);
+}
+
+.note-core {
+  position: relative;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 32%, #ffffff 0%, #ffffff 38%, #eeeeee 62%, #bdbdbd 100%);
+  border: 2px solid rgba(255,255,255,0.95);
+  box-sizing: border-box;
+  box-shadow: 0 0 5px rgba(255,255,255,0.95), 0 0 10px rgba(255,255,255,0.55), 0 0 20px var(--lane-color, #ffffff), inset 0 2px 3px rgba(255,255,255,0.9), inset 0 -3px 4px rgba(0,0,0,0.18);
+  z-index: 3;
+}
+
+.note-highlight {
+  position: absolute;
+  top: 4px;
+  left: 5px;
+  width: 7px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.95);
+  filter: blur(0.5px);
+  opacity: 0.9;
+}
+
+/* LINHA DE ACERTO */
+.hit-line {
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  bottom: 9%;
+  width: 90%;
+  height: 72px;
+  display: flex;
+  justify-content: stretch;
+  align-items: center;
+  z-index: 10;
+}
+
+.hit-pad {
+  position: relative;
+  flex: 0 0 20%;
+  width: 20%;
+  height: 46px;
+  margin: 0;
+  box-sizing: border-box;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(20,20,20,0.96), rgba(0,0,0,0.99));
+  border: 3px solid;
+  opacity: 0.98;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  box-shadow: inset 0 0 16px rgba(0,0,0,0.8);
+  transition: transform 0.06s ease, filter 0.06s ease, box-shadow 0.06s ease;
+  will-change: transform, filter, box-shadow;
+}
+
+.hit-pad-inner {
+  width: 62%;
+  height: 62%;
+  border-radius: 50%;
+  opacity: 0.82;
+  box-shadow: inset 0 0 8px rgba(255,255,255,0.18);
+}
+
+/* HUD DIREITO */
+.game-side-info {
+  position: absolute;
+  top: 28px;
+  right: 28px;
+  z-index: 20;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  max-width: 340px;
+}
+
+.bpm-box,
+.note-counter {
+  min-width: 105px;
+  padding: 14px 18px;
+  text-align: center;
+  border-radius: 14px;
+  background: rgba(8, 10, 14, 0.88);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+.bpm-box span,
+.note-counter span {
+  display: block;
+  color: #aaa;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.bpm-box strong,
+.note-counter strong {
+  display: block;
+  margin-top: 5px;
+  font-size: 24px;
+}
+
+/* BOTÃO VOLTAR */
+.game-back {
+  position: absolute;
+  top: 110px;
+  left: 28px;
+  z-index: 30;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 50%;
+  background: rgba(0,0,0,0.65);
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.game-back:hover {
+  background: rgba(255,255,255,0.12);
+}
+
+/* LOADING */
+.game-loading {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle, #21112b, #070709 70%);
+  color: white;
+  text-align: center;
+}
+
+.loading-guitar {
+  font-size: 70px;
+  margin-bottom: 20px;
+  animation: guitarPulse 1s infinite alternate;
+}
+
+@keyframes guitarPulse {
+  from { transform: scale(1); }
+  to { transform: scale(1.12); }
+}
+
+.game-loading h1 {
+  margin: 0;
+  font-size: 30px;
+}
+
+.game-loading p {
+  color: #aaa;
+}
+
+/* FINAL */
+.finish-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.78);
+}
+
+.finish-modal {
+  width: 440px;
+  padding: 42px;
+  text-align: center;
+  border-radius: 24px;
+  background: linear-gradient(145deg, rgba(25,25,32,0.98), rgba(8,8,12,0.98));
+  border: 1px solid rgba(199,53,255,0.45);
+  box-shadow: 0 0 70px rgba(199,53,255,0.2);
+}
+
+.finish-logo {
+  width: 130px;
+  height: auto;
+  margin: 0 auto 15px;
+  display: block;
+  object-fit: contain;
+  filter: drop-shadow(0 0 15px rgba(199, 53, 255, 0.5));
+}
+
+.finish-modal h1 {
+  margin: 12px 0;
+  font-size: 34px;
+}
+
+.finish-modal p {
+  color: #aaa;
+  margin-bottom: 28px;
+}
+
+.finish-modal button {
+  border: 0;
+  border-radius: 12px;
+  padding: 14px 24px;
+  background: linear-gradient(135deg, #9d2cff, #d43cff);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 25px rgba(199,53,255,0.3);
+}
+
+.finish-modal button:hover {
+  transform: translateY(-1px);
+}
+
+/* GAMEPLAY - PAD PRESSIONADO */
+.hit-pad-pressed {
+  transform: translateY(-5px) scale(1.04);
+  filter: brightness(1.55);
+}
+
+/* TECLA */
+.key-label {
+  position: absolute;
+  left: 50%;
+  bottom: -27px;
+  transform: translateX(-50%);
+  width: 28px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.82);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  pointer-events: none;
+}
+
+/* FOGO - Formato Espalhado (Leque) */
+.fire-effect {
+  position: absolute;
+  bottom: 22%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px; 
+  height: 100px; 
+  pointer-events: none;
+  z-index: 20;
+  mix-blend-mode: screen;
+  will-change: transform, opacity;
+
+  /* O tempo deve ser 0.2s (200ms) para combinar com o Clone Hero */
+  animation: fireCycle 0.2s cubic-bezier(0.2, 0.9, 0.4, 1) forwards; 
+  opacity: 0;
+}
+
+/* =========================================================
+   FIRE EFFECT CONTÍNUO DO SUSTAIN
+   Reaproveita o mesmo fogo do hit normal,
+   porém fica alto e contínuo.
+========================================================= */
+
+.sustain-fire-effect {
+  /*
+   * Não usamos a animação curta do fogo normal.
+   */
+  animation: none !important;
+
+  /*
+   * Sobe bastante acima do hit pad.
+   */
+  bottom: 6%;
+  height: 175%;
+  width: 125%;
+
+  /*
+   * Mantém o fogo centralizado.
+   */
+  left: 50%;
+
+  /*
+   * Não interfere no teclado nem no mouse.
+   */
+  pointer-events: none;
+
+  /*
+   * Fica acima do pad.
+   */
+  z-index: 25;
+
+  /*
+   * Evita repaint desnecessário fora dessa área.
+   */
+  contain: layout paint;
+
+  /*
+   * Não adicionamos filter/blur aqui.
+   * O próprio fogo existente já possui o visual desejado.
+   */
+  will-change: opacity;
+}
+
+
+/* =========================================================
+   CHAMA CENTRAL DO SUSTAIN
+========================================================= */
+
+.sustain-fire-effect .flame-2 {
+  width: 38px;
+  height: 165px;
+
+  /*
+   * Um movimento muito pequeno para parecer vivo,
+   * sem dar a sensação de tremulação.
+   */
+  animation:
+    sustainFireCenter
+    0.32s
+    ease-in-out
+    infinite
+    alternate;
+}
+
+
+/* =========================================================
+   CHAMA ESQUERDA
+========================================================= */
+
+.sustain-fire-effect .flame-1 {
+  width: 46px;
+  height: 105px;
+
+  left: 18%;
+
+  animation:
+    sustainFireLeft
+    0.38s
+    ease-in-out
+    infinite
+    alternate;
+}
+
+
+/* =========================================================
+   CHAMA DIREITA
+========================================================= */
+
+.sustain-fire-effect .flame-3 {
+  width: 46px;
+  height: 100px;
+
+  right: 18%;
+
+  animation:
+    sustainFireRight
+    0.42s
+    ease-in-out
+    infinite
+    alternate;
+}
+
+
+/* =========================================================
+   FOGO SUSTAIN — MOVIMENTOS
+   Curtos e suaves.
+========================================================= */
+
+@keyframes sustainFireCenter {
+
+  0% {
+    transform:
+      translateX(-50%)
+      translateY(3px)
+      scaleX(0.92)
+      scaleY(0.94);
+  }
+
+  100% {
+    transform:
+      translateX(-50%)
+      translateY(-4px)
+      scaleX(1.04)
+      scaleY(1.08);
+  }
+}
+
+
+@keyframes sustainFireLeft {
+
+  0% {
+    transform:
+      rotate(-25deg)
+      translateY(2px)
+      scaleX(0.92)
+      scaleY(0.94);
+  }
+
+  100% {
+    transform:
+      rotate(-18deg)
+      translateY(-3px)
+      scaleX(1.04)
+      scaleY(1.06);
+  }
+}
+
+
+@keyframes sustainFireRight {
+
+  0% {
+    transform:
+      rotate(25deg)
+      translateY(2px)
+      scaleX(0.92)
+      scaleY(0.94);
+  }
+
+  100% {
+    transform:
+      rotate(18deg)
+      translateY(-3px)
+      scaleX(1.04)
+      scaleY(1.06);
+  }
+}
+
+@keyframes fireCycle {
+  0%   { opacity: 0; transform: translateX(-50%) scale(0.4); }
+  25%  { opacity: 1; transform: translateX(-50%) scale(1); }
+  70%  { opacity: 1; transform: translateX(-50%) scale(1.05); }
+  100% { opacity: 0; transform: translateX(-50%) scaleY(0.7) scaleX(1.1); }
+}
+
+/* FEIXE BRANCO CENTRAL (Bem fino) */
+.fire-beam {
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 10px;
+  background: linear-gradient(to top, #ffffff 0%, rgba(255, 255, 255, 0.7) 20%, rgba(255, 255, 255, 0) 100%);
+  box-shadow: 0 0 10px #ffffffb0, 0 0 25px #ffcd44af;
+  transform-origin: bottom center;
+  animation: beamShoot 0.5s ease-out forwards;
+}
+
+@keyframes beamShoot {
+  0%   { transform: translateX(-50%) scaleY(0.3); opacity: 0; }
+  30%  { opacity: 1; }
+  100% { transform: translateX(-50%) scaleY(5); opacity: 0; }
+}
+
+/* LABAREDAS ESPALHADAS */
+.flame-container {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.flame {
+  position: absolute;
+  bottom: -5px;
+  /* Tornamos as labaredas mais largas e menos altas */
+  width: 50px;
+  height: 70px;
+  border-radius: 60% 60% 20% 20% / 80% 80% 20% 20%;
+  background: radial-gradient(
+    ellipse at bottom center,
+    rgba(255, 242, 160, 0.822) 0%, 
+    rgba(255, 183, 0, 0.726) 30%, 
+    rgba(255, 106, 0, 0.507) 60%, 
+    rgba(255, 42, 0, 0.164) 80%, 
+    transparent 100%
+  );
+  /* O blur maior derruba o aspecto cilíndrico */
+  filter: blur(2.5px);
+  transform-origin: bottom center;
+  box-shadow: 0 0 20px rgba(255, 150, 0, 0.5);
+}
+
+/* Dispersão em leque (Rotacionadas para os lados) */
+.flame-1 {
+  left: 20%;
+  transform: rotate(-25deg) scaleX(1.1);
+  animation: flicker1 0.08s infinite alternate;
+}
+.flame-2 {
+  left: 50%;
+  transform: translateX(-50%) rotate(0deg);
+  width: 40px; /* A do centro um pouco mais estreita */
+  height: 130px;
+  animation: flicker2 0.1s infinite alternate;
+}
+.flame-3 {
+  right: 20%;
+  transform: rotate(25deg) scaleX(1.1);
+  animation: flicker3 0.12s infinite alternate;
+}
+
+@keyframes flicker1 {
+  0% { transform: rotate(-25deg) scaleX(0.9) scaleY(0.95); }
+  100% { transform: rotate(-20deg) scaleX(1.1) scaleY(1.05); }
+}
+@keyframes flicker2 {
+  0% { transform: translateX(-50%) rotate(-2deg) scaleX(0.9); }
+  100% { transform: translateX(-50%) rotate(2deg) scaleX(1.1); }
+}
+@keyframes flicker3 {
+  0% { transform: rotate(25deg) scaleX(0.9) scaleY(0.95); }
+  100% { transform: rotate(20deg) scaleX(1.1) scaleY(1.05); }
+}
+
+
+
+/* OVERRIDE DO PAD */
+.hit-pad.fire-active {
+  border-color: #ff3300 !important;
+  box-shadow: 
+    0 0 30px #ff3300, 
+    0 0 60px #ff3300, 
+    0 0 90px rgba(255, 150, 0, 0.5), 
+    inset 0 0 35px rgba(255, 200, 0, 0.8) !important;
+}
+
+.hit-pad.fire-active .hit-pad-inner {
+  background: radial-gradient(circle, #ffffff 0%, #ffdd00 30%, #ff5500 70%, rgba(0,0,0,0.9) 100%) !important;
+  box-shadow: 0 0 30px rgba(255, 200, 0, 0.9), inset 0 0 30px rgba(255,255,255,0.9) !important;
+}
+
+/* CONTAGEM REGRESSIVA */
+.countdown-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  animation: fadeIn 0.2s ease-out;
+}
+
+.countdown-number {
+  font-size: 120px;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 0 0 30px rgba(255,255,255,0.8), 0 0 60px rgba(199,53,255,0.6);
+  animation: countdownPulse 1s ease-in-out infinite;
+}
+
+@keyframes countdownPulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.9; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* RESULTADO FINAL */
+.finish-stats {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 12px;
+  margin: 28px 0;
+  flex-wrap: wrap;
+}
+
+.finish-stat {
+  min-width: 90px;
+  padding: 16px 14px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: center;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.finish-stat:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.finish-stat-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 8px;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #aaa;
+}
+
+.finish-stat-icon {
+  font-size: 17px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.finish-stat strong {
+  display: block;
+  font-size: 30px;
+  line-height: 1;
+  font-weight: 800;
+}
+
+.finish-stat.success {
+  border-color: rgba(32, 216, 59, 0.28);
+  box-shadow: 0 0 20px rgba(32, 216, 59, 0.08);
+}
+.finish-stat.success .finish-stat-icon { color: #20d83b; }
+.finish-stat.success strong { color: #20d83b; text-shadow: 0 0 14px rgba(32, 216, 59, 0.35); }
+
+.finish-stat.error {
+  border-color: rgba(255, 32, 32, 0.28);
+  box-shadow: 0 0 20px rgba(255, 32, 32, 0.08);
+}
+.finish-stat.error .finish-stat-icon { color: #ff2020; }
+.finish-stat.error strong { color: #ff2020; text-shadow: 0 0 14px rgba(255, 32, 32, 0.35); }
+
+.finish-stat.accuracy {
+  border-color: rgba(199, 53, 255, 0.28);
+  box-shadow: 0 0 20px rgba(199, 53, 255, 0.08);
+}
+.finish-stat.accuracy .finish-stat-icon { color: #c735ff; }
+.finish-stat.accuracy strong { color: #c735ff; text-shadow: 0 0 14px rgba(199, 53, 255, 0.35); }
+
+.finish-stat.score {
+  border-color: rgba(255, 215, 0, 0.3);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
+}
+.finish-stat.score strong { color: #ffd700; }
+
+.finish-stat.max-combo {
+  border-color: rgba(0, 255, 255, 0.3);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+}
+.finish-stat.max-combo strong { color: #00ffff; }
+
+/* SCORE BOX */
+.score-box {
+  position: absolute;
+  left: 24px;
+  bottom: 15%;
+  z-index: 30;
+  width: 220px;
+  padding: 16px 20px;
+  background: rgba(15, 10, 20, 0.85);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.15), inset 0 0 20px rgba(0, 0, 0, 0.6);
+  font-family: 'New Rocker', cursive, sans-serif;
+  color: white;
+}
+
+.score-box-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.score-label {
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  color: #aaa;
+}
+
+.score-rank {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.rank-icon {
+  font-size: 1.2rem;
+  filter: drop-shadow(0 0 5px #ff8800);
+}
+
+.multiplier-value {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.score-value {
+  font-size: 2.5rem;
+  font-weight: 900;
+  text-align: right;
+  margin-bottom: 10px;
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.score-progress {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #00ffff, #8a2be2);
+  border-radius: 3px;
+  box-shadow: 0 0 10px #00ffff;
+  transition: width 0.2s ease;
+}
+
+.combo-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.combo-label {
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  color: #aaa;
+}
+
+.combo-number {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.combo-pop {
+  animation: comboPop 0.2s ease-out;
+}
+
+@keyframes comboPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+.multiplier-1 .multiplier-value,
+.multiplier-1 .score-value { color: #ffffff; }
+
+.multiplier-2 .multiplier-value,
+.multiplier-2 .score-value {
+  color: #ffee88;
+  text-shadow: 0 0 10px rgba(255, 238, 136, 0.8);
+}
+
+.multiplier-3 .multiplier-value,
+.multiplier-3 .score-value {
+  color: #88ff88;
+  text-shadow: 0 0 15px rgba(136, 255, 136, 0.9);
+}
+
+.multiplier-4 .multiplier-value,
+.multiplier-4 .score-value {
+  color: #00ffff;
+  text-shadow: 0 0 20px rgba(0, 255, 255, 0.9), 0 0 40px rgba(255, 0, 255, 0.6);
+  animation: pulse 0.8s infinite alternate;
+}
+
+@keyframes pulse {
+  from { text-shadow: 0 0 15px #00ffff, 0 0 30px #ff00ff; }
+  to { text-shadow: 0 0 25px #00ffff, 0 0 50px #ff00ff; }
+}
+
+/* LIGHTNING MODE - Efeitos Globais (Flash, Raio e Medidor) */
+.lightning-flash {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.8);
+  z-index: 80;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  animation: flashOut 0.15s ease-out forwards;
+}
+
+@keyframes flashOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+/* RAIO - OTIMIZADO (Sem filtros pesados, extremamente fluido) */
+.lightning-bolt-container {
+  position: fixed;
+  top: -10%;
+  left: 0;
+  width: 100vw;
+  height: 120%;
+  pointer-events: none;
+  z-index: 999;
+  mix-blend-mode: screen;
+  animation: boltStrike 0.45s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.lightning-bolt-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  /* Removemos os drop-shadows para evitar lag */
+}
+
+/* Brilho Externo (Azul escuro/transparente, grosso) */
+.main-strike-glow-outer {
+  stroke: rgba(0, 100, 255, 0.25);
+  stroke-width: 28;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Brilho Interno (Ciano, médio) */
+.main-strike-glow-inner {
+  stroke: rgba(0, 255, 255, 0.45);
+  stroke-width: 12;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Núcleo do Raio (Branco) */
+.main-strike {
+  stroke: #ffffff;
+  stroke-width: 2.5;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Galhos (Ciano com transparência) */
+.branch-strike {
+  stroke: rgba(102, 221, 255, 0.6);
+  stroke-width: 1.5;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@keyframes boltStrike {
+  0%   { transform: translateY(-15%); opacity: 0; }
+  15%  { transform: translateY(0); opacity: 1; }
+  25%  { opacity: 0.95; }
+  60%  { opacity: 0.6; }
+  100% { transform: translateY(0); opacity: 0; }
+}
+
+.lightning-meter-container {
+  position: absolute;
+  left: 30px;
+  bottom: 28%;
+  width: 20px;
+  height: 150px;
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  overflow: hidden;
+  z-index: 40;
+}
+
+.lightning-meter-fill {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(to top, #00ffff, #0088ff);
+  box-shadow: 0 0 15px #00ffff;
+  transition: none;
+}
+
+.lightning-meter-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #00ffff;
+  font-size: 18px;
+  font-weight: bold;
+  text-shadow: 0 0 10px #00ffff;
+  pointer-events: none;
+}
+
+/* LIGHTNING MODE - Sobrescritas das Pistas e do Fogo */
+[data-theme="lightning"] .highway-surface {
+  border-left: 4px solid rgba(0, 255, 255, 0.8);
+  border-right: 4px solid rgba(0, 255, 255, 0.8);
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.6), inset 0 0 30px rgba(0, 255, 255, 0.2);
+}
+
+[data-theme="lightning"] .note {
+  background: radial-gradient(ellipse at 50% 45%, rgba(255, 255, 255, 0.5) 0%, rgba(0, 255, 255, 0.2) 20%, rgba(0, 0, 0, 0.2) 65%, rgba(0, 0, 0, 0.5) 100%);
+  border-color: rgba(0, 255, 255, 0.9);
+  filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.8));
+}
+
+[data-theme="lightning"] .hit-pad {
+  border-color: #00ffff !important;
+  box-shadow: 0 0 15px #00ffff, 0 0 30px #00ffff, inset 0 0 20px rgba(0, 255, 255, 0.4) !important;
+}
+
+[data-theme="lightning"] .hit-pad-inner {
+  background: radial-gradient(circle, #00ffff 0%, rgba(0, 0, 0, 0.8) 62%, rgba(0, 0, 0, 0.98) 100%) !important;
+}
+
+/* Substituição dos estilos antigos de fogo para o modo Lightning */
+[data-theme="lightning"] .fire-beam {
+  background: linear-gradient(to top, #ffffff 0%, rgba(0, 255, 255, 0.8) 20%, rgba(0, 255, 255, 0) 100%);
+  box-shadow: 0 0 10px #ffffff, 0 0 25px #00ffff;
+}
+
+[data-theme="lightning"] .flame {
+  background: radial-gradient(
+    ellipse at bottom center,
+    #ffffff 0%, 
+    #00ffff 30%, 
+    #0088ff 60%, 
+    #4400ff 80%, 
+    transparent 100%
+  );
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
+}
+
+[data-theme="lightning"] .fire-glow-ring {
+  background: radial-gradient(ellipse at center, #00ffff 0%, #0055ff 40%, transparent 80%);
+  box-shadow: 0 0 50px #00ffff, 0 0 100px #0044ff;
+}
+
+[data-theme="lightning"] .hit-pad.fire-active {
+  border-color: #00ffff !important;
+  box-shadow: 
+    0 0 30px #00ffff, 
+    0 0 60px #00ffff, 
+    0 0 90px rgba(0, 150, 255, 0.5), 
+    inset 0 0 35px rgba(0, 255, 255, 0.8) !important;
+}
+
+[data-theme="lightning"] .hit-pad.fire-active .hit-pad-inner {
+  background: radial-gradient(circle, #ffffff 0%, #00ffff 30%, #0044ff 70%, rgba(0,0,0,0.9) 100%) !important;
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.9), inset 0 0 30px rgba(255,255,255,0.9) !important;
+}
+
+/* =========================================
+   MENU DE PAUSA
+========================================= */
+
+.pause-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 120;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.pause-modal {
+  width: 360px;
+  padding: 40px;
+  text-align: center;
+  border-radius: 20px;
+  background: linear-gradient(145deg, rgba(25, 25, 32, 0.98), rgba(8, 8, 12, 0.98));
+  border: 1px solid rgba(0, 255, 255, 0.4);
+  box-shadow: 0 0 50px rgba(0, 255, 255, 0.2);
+}
+
+.pause-modal h2 {
+  margin: 0 0 28px;
+  font-family: 'New Rocker', cursive;
+  font-size: 2rem;
+  color: #ffffff;
+  text-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+}
+
+.pause-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pause-button {
+  padding: 14px;
+  border: 1px solid rgba(0, 255, 255, 0.4);
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  font-family: 'New Rocker', cursive;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pause-button:hover {
+  background: rgba(0, 255, 255, 0.2);
+  border-color: #00ffff;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+  transform: scale(1.05);
+}
+
+/* ===========================================
+   SUSTAIN SHAPE
+   Barra fina, estável e leve.
+=========================================== */
+
+.sustain-layer {
+  overflow: visible;
+  pointer-events: none;
+  contain: layout paint;
+}
+
+.sustain-shape {
+  stroke: none;
+  vector-effect: non-scaling-stroke;
+  transition: none !important;
+  transform: translateZ(0);
+  opacity: 0.90;
+  shape-rendering: geometricPrecision;
+}
+
+.sustain-shape.sustain-active {
+  opacity: 1;
+}
+
+/*
+ * Glow do sustain ativo:
+ * usa apenas strokes SVG estáticos, sem filter/blur.
+ * Isso realça a cor sem provocar tremulação durante o movimento.
+ */
+.sustain-active-glow-outer {
+  opacity: 0.42;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  pointer-events: none;
+}
+
+.sustain-active-glow-inner {
+  opacity: 0.88;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  pointer-events: none;
+}
+
+/* Núcleo claro do sustain ativo.
+   Sem filter/blur para não causar tremulação nem custo alto. */
+.sustain-active-core {
+  opacity: 0.42;
+  pointer-events: none;
+  shape-rendering: geometricPrecision;
+}
+
+/* Modo lightning */
+[data-theme="lightning"] .sustain-shape {
+  opacity: 0.94;
+}
+
+[data-theme="lightning"] .sustain-shape.sustain-active {
+  opacity: 1;
+}
+
+[data-theme="lightning"] .sustain-active-core {
+  fill: rgba(255,255,255,0.48);
+}
+
+/* =========================================================
+   FOGO CONTÍNUO DO SUSTAIN
+   Mesma linguagem visual do fogo normal,
+   mas sem o container gigante que estava criando
+   o artefato quadrado.
+========================================================= */
+
+.sustain-fire {
+  position: absolute;
+
+  left: 50%;
+  bottom: 0;
+
+  width: 150px;
+  height: 125px;
+
+  transform: translateX(-50%);
+
+  pointer-events: none;
+
+  z-index: 24;
+
+  /*
+   * NÃO usar:
+   * - mix-blend-mode
+   * - contain
+   * - filter
+   * - opacity no container
+   *
+   * O fogo deve ser formado apenas pelas chamas.
+   */
+  overflow: visible;
+}
+
+
+/* =========================================================
+   CONTAINER DAS CHAMAS
+========================================================= */
+
+.sustain-flame-container {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   CHAMA BASE
+   Reutiliza o MESMO visual das chamas normais.
+========================================================= */
+
+.sustain-fire .flame {
+  position: absolute;
+
+  bottom: -5px;
+
+  border-radius:
+    60% 60% 20% 20% /
+    80% 80% 20% 20%;
+
+  background:
+    radial-gradient(
+      ellipse at bottom center,
+      rgba(255, 242, 160, 0.90) 0%,
+      rgba(255, 183, 0, 0.82) 30%,
+      rgba(255, 106, 0, 0.60) 60%,
+      rgba(255, 42, 0, 0.18) 80%,
+      transparent 100%
+    );
+
+  filter: blur(2.5px);
+
+  transform-origin: bottom center;
+
+  box-shadow:
+    0 0 20px rgba(255, 150, 0, 0.50);
+
+  opacity: 1;
+
+  will-change:
+    transform,
+    opacity;
+}
+
+
+/* =========================================================
+   CHAMA ESQUERDA
+========================================================= */
+
+.sustain-flame-1 {
+  left: 18%;
+
+  width: 50px;
+  height: 82px;
+
+  animation:
+    sustainFlicker1
+    0.13s
+    ease-in-out
+    infinite
+    alternate;
+}
+
+
+/* =========================================================
+   CHAMA CENTRAL
+========================================================= */
+
+.sustain-flame-2 {
+  left: 50%;
+
+  width: 42px;
+  height: 125px;
+
+  transform:
+    translateX(-50%);
+
+  animation:
+    sustainFlicker2
+    0.11s
+    ease-in-out
+    infinite
+    alternate;
+}
+
+
+/* =========================================================
+   CHAMA DIREITA
+========================================================= */
+
+.sustain-flame-3 {
+  right: 18%;
+
+  width: 50px;
+  height: 80px;
+
+  animation:
+    sustainFlicker3
+    0.15s
+    ease-in-out
+    infinite
+    alternate;
+}
+
+
+/* =========================================================
+   MOVIMENTO DO FOGO
+   Pequeno, rápido e contínuo.
+========================================================= */
+
+@keyframes sustainFlicker1 {
+
+  0% {
+    transform:
+      rotate(-25deg)
+      scaleX(0.90)
+      scaleY(0.94);
+
+    opacity: 0.88;
+  }
+
+  100% {
+    transform:
+      rotate(-18deg)
+      translateY(-3px)
+      scaleX(1.08)
+      scaleY(1.05);
+
+    opacity: 1;
+  }
+}
+
+
+@keyframes sustainFlicker2 {
+
+  0% {
+    transform:
+      translateX(-50%)
+      scaleX(0.90)
+      scaleY(0.94);
+
+    opacity: 0.90;
+  }
+
+  100% {
+    transform:
+      translateX(-50%)
+      translateY(-5px)
+      scaleX(1.07)
+      scaleY(1.08);
+
+    opacity: 1;
+  }
+}
+
+
+@keyframes sustainFlicker3 {
+
+  0% {
+    transform:
+      rotate(25deg)
+      scaleX(0.90)
+      scaleY(0.94);
+
+    opacity: 0.88;
+  }
+
+  100% {
+    transform:
+      rotate(18deg)
+      translateY(-3px)
+      scaleX(1.08)
+      scaleY(1.05);
+
+    opacity: 1;
+  }
+}
+
+
+/* =========================================================
+   FEIXE CENTRAL
+   Pequeno e contínuo.
+========================================================= */
+
+.sustain-fire-beam {
+  position: absolute;
+
+  left: 50%;
+  bottom: 0;
+
+  width: 2px;
+  height: 82px;
+
+  transform:
+    translateX(-50%);
+
+  transform-origin:
+    bottom center;
+
+  background:
+    linear-gradient(
+      to top,
+      #ffffff 0%,
+      rgba(255,255,255,0.75) 22%,
+      rgba(255,200,70,0.40) 55%,
+      rgba(255,160,0,0) 100%
+    );
+
+  box-shadow:
+    0 0 8px rgba(255,255,255,0.85),
+    0 0 18px rgba(255,180,30,0.50);
+
+  opacity: 0.85;
+
+  animation:
+    sustainBeamPulse
+    0.30s
+    ease-in-out
+    infinite
+    alternate;
+}
+
+
+@keyframes sustainBeamPulse {
+
+  0% {
+    transform:
+      translateX(-50%)
+      scaleY(0.90);
+
+    opacity: 0.72;
+  }
+
+  100% {
+    transform:
+      translateX(-50%)
+      scaleY(1.04);
+
+    opacity: 1;
+  }
+}
+
+
+/* =========================================================
+   FAÍSCAS
+========================================================= */
+
+.sustain-sparks {
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  overflow: visible;
+
+  z-index: 30;
+}
+
+
+.sustain-spark {
+  position: absolute;
+
+  width: 3px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #fff6bd;
+
+  box-shadow:
+    0 0 4px #ffffff,
+    0 0 8px #ffd43b;
+
+  opacity: 0;
+
+  animation:
+    sustainSpark
+    0.8s
+    ease-out
+    infinite;
+}
+
+
+.spark-1 {
+  left: 38%;
+  bottom: 40%;
+
+  animation-delay: 0s;
+}
+
+
+.spark-2 {
+  left: 50%;
+  bottom: 58%;
+
+  animation-delay: 0.20s;
+}
+
+
+.spark-3 {
+  left: 62%;
+  bottom: 45%;
+
+  animation-delay: 0.42s;
+}
+
+
+@keyframes sustainSpark {
+
+  0% {
+    opacity: 0;
+
+    transform:
+      translate3d(0, 5px, 0)
+      scale(0.7);
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  70% {
+    opacity: 0.75;
+  }
+
+  100% {
+    opacity: 0;
+
+    transform:
+      translate3d(2px, -35px, 0)
+      scale(0.45);
+  }
+}
+
+
+/* =========================================================
+   CENTRO DO HIT PAD
+========================================================= */
+
+.hit-pad-inner {
+  position: relative;
+
+  z-index: 40;
+
+  transform-origin:
+    center center;
+
+  transition:
+    transform 0.13s cubic-bezier(0.2, 0.85, 0.35, 1),
+    box-shadow 0.13s ease,
+    filter 0.13s ease;
+
+  will-change:
+    transform,
+    box-shadow;
+}
+
+
+.hit-pad.sustain-holding .hit-pad-inner {
+
+  transform:
+    translateY(-7px)
+    scale(1.10);
+
+  filter:
+    brightness(1.40);
+
+  box-shadow:
+    inset 0 0 8px rgba(255,255,255,0.55),
+    0 0 12px rgba(255,255,255,0.42),
+    0 0 24px var(--lane-color, #ffffff);
+}
+
+
+.hit-pad.sustain-holding {
+
+  transform:
+    translateY(-4px)
+    scale(1.02);
+
+  transition:
+    transform 0.13s cubic-bezier(0.2,0.85,0.35,1);
+}
+
+
+/* =========================================================
+   GLOW DA BARRA
+   Continua forte, mas completamente estático.
+========================================================= */
+
+.sustain-active-glow-outer {
+
+  opacity: 0.58;
+
+  stroke-linecap:
+    round;
+
+  stroke-linejoin:
+    round;
+
+  vector-effect:
+    non-scaling-stroke;
+
+  pointer-events:
+    none;
+}
+
+
+.sustain-active-glow-inner {
+
+  opacity: 1;
+
+  stroke-linecap:
+    round;
+
+  stroke-linejoin:
+    round;
+
+  vector-effect:
+    non-scaling-stroke;
+
+  pointer-events:
+    none;
+}
+
+.hit-pad-inner {
+  position: relative;
+  transform-origin: center center;
+  transition: transform 0.12s cubic-bezier(0.2, 0.85, 0.35, 1), box-shadow 0.12s ease, filter 0.12s ease;
+  will-change: transform, box-shadow, filter;
+}
+
+.hit-pad.sustain-holding .hit-pad-inner {
+  transform: translateY(-7px) scale(1.08);
+  filter: brightness(1.38);
+  box-shadow:
+    inset 0 0 8px rgba(255,255,255,0.50),
+    0 0 12px rgba(255,255,255,0.38),
+    0 0 24px var(--lane-color, #ffffff);
+}
+
+.hit-pad.sustain-holding {
+  transform: translateY(-4px) scale(1.02);
+  transition: transform 0.12s cubic-bezier(0.2,0.85,0.35,1);
+}
+
+.sustain-active-glow-outer {
+  opacity: 0.58;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  pointer-events: none;
+}
+
+.sustain-active-glow-inner {
+  opacity: 0.98;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  pointer-events: none;
+}
+
+[data-theme="lightning"] .sustain-fire-effect .flame {
+  background: radial-gradient(ellipse at 50% 92%, #ffffff 0%, #baffff 20%, #00ffff 48%, #168cff 72%, transparent 100%);
+}
+
+[data-theme="lightning"] .sustain-fire-effect .fire-beam {
+  background: linear-gradient(to top, #ffffff 0%, rgba(0,255,255,0.90) 30%, rgba(0,255,255,0) 100%);
+  box-shadow: 0 0 8px #ffffff, 0 0 20px #00ffff;
+}
+
+[data-theme="lightning"] .sustain-spark {
+  background: #ffffff;
+  box-shadow: 0 0 4px #ffffff, 0 0 8px #00ffff;
+}

@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: guitar-livre-api
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    healthCheckPath: /api/health
+    envVars:
+      - key: CORS_ORIGINS
+        sync: false
+      - key: STORAGE_ROOT
+        value: /app/storage

@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.env
+venv/
+storage/songs/*
+!storage/songs/.gitkeep

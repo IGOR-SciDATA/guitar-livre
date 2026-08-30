@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=New+Rocker&display=swap');
+
+/* =========================================
+   TELA INICIAL – VÍDEO + MENU
+========================================= */
+
+.home-container {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: #000;
+  font-family: 'New Rocker', cursive, Impact, sans-serif;
+}
+
+.home-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  z-index: 0;
+}
+
+/* Menu sobreposto – alinhado à direita */
+.home-menu {
+  position: absolute;
+  z-index: 10;
+  right: 8vw;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 28px;
+}
+
+.menu-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #fff8f857;
+  transform: skewX(-5deg);
+  text-shadow: 0 0 8px #fafafa;
+  transition:
+    transform 0.15s ease,
+    color 0.15s ease,
+    text-shadow 0.15s ease;
+  will-change: transform;
+  outline: 10px;
+}
+
+.menu-button:hover {
+  transform: skewX(-5deg) scale(1.05);
+  color: #e6b618;
+  text-shadow: 0 0 12px #1b1b1b;
+}
+
+.menu-button:active {
+  transform: skewX(-5deg) scale(0.98);
+}
+
+
+@keyframes selectPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* =========================================
+   CONFIGURAÇÕES (placeholder)
+========================================= */
+
+.config-page {
+  min-height: 100vh;
+  background: #08060b;
+  color: #ffffff;
+  padding: 32px;
+}
+
+.config-content {
+  max-width: 700px;
+  margin: 60px auto 0;
+  padding: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.045);
+  text-align: center;
+  color: #a9a1b3;
+}
+
+/* =========================================
+   TELAS DE PLAY / UPLOAD (mantidas)
+========================================= */
+
+/* As classes existentes para play-page, upload-page etc. 
+   permanecem no arquivo original; abaixo apenas complementos. */
+
+.play-page {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 20% 10%, #24152f 0%, transparent 35%),
+    radial-gradient(circle at 90% 80%, #17102b 0%, transparent 35%),
+    #08060b;
+  color: #ffffff;
+  padding: 32px;
+}
+
+.play-header {
+  max-width: 1200px;
+  margin: 0 auto 36px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.back-button {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.page-label {
+  color: #a9a1b3;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.play-header h1 {
+  margin: 4px 0 0;
+  font-size: 2.2rem;
+}
+
+.toast-message {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(10, 8, 20, 0.95);
+  border: 1px solid #00ffff;
+  border-radius: 12px;
+  padding: 14px 24px;
+  color: #ffffff;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  text-shadow: 0 0 8px #00ffff;
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
+  z-index: 9999;
+  animation: toastEntry 0.3s ease-out;
+}
+
+@keyframes toastEntry {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}

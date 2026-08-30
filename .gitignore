@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+ENV/
+.env
+.env.*
+!.env.example
+
+# Node
+node_modules/
+dist/
+.vite/
+
+# Guitar Livre generated data
+backend/storage/songs/*
+!backend/storage/songs/.gitkeep
+backend/downloads/
+backend/downloads_test/
+*.mp4
+*.mp3
+*.ogg
+*.opus
+*.wav
+*.part
+*.crdownload
+*.log
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
