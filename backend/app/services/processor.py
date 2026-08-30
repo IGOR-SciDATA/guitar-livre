@@ -93,9 +93,7 @@ def process_song(youtube_url: str, song_folder: str):
         "noplaylist": True,
         "force_ipv4": True,
         "extractor_args": {
-            "youtube": {
-                "player_client": ["web_embedded"]
-            }
+            "youtube": {}
         },
         "remote_components": ["ejs:github"],
         "js_runtimes": {"deno": {}},
