@@ -3,37 +3,3 @@ npm install
 npm run dev
 uvicorn app.main:app --reload
 ffmpeg -version
-
-cd C:\Users\Admin\Desktop\Projetos\Guitar Livre\guitar-livre\backend
-
-cd C:\Users\Admin\Desktop\Projetos\Guitar Livre\guitar-livre\frontend
-
-
-------TREINAMENTO DE MODELO-------------
-# Volte para a pasta backend
-cd C:\Users\Admin\Desktop\Projetos\Guitar Livre\guitar-livre\backend
-
-# Execute o script como módulo
-python -m app.services.model_pipeline.build_dataset
-
-# Converta .opus para .wav
-ffmpeg -i "C:\Users\Admin\Desktop\Projetos\Guitar Livre\guitar-livre\backend\app\services\model_pipeline\data\endless\song.opus" -acodec pcm_s16le -ar 22050 -ac 1 "C:\Users\Admin\Desktop\Projetos\Guitar Livre\guitar-livre\backend\app\services\model_pipeline\data\endless\song.wav"
-
-# Entender formato do arquivo chart
-python -m app.services.model_pipeline.debug_chart
-
-# Verificar lanes validas nas charts
-python -m app.services.model_pipeline.debug_lanes
-
-#treinar modelo
-python -m app.services.model_pipeline.train_model
-
-# Testar acuracia e threshold do modelo
-python -m app.services.model_pipeline.test_threshold
-
-# Teste rápido com 500k amostras e 40 árvores
-python -m app.services.model_pipeline.train_model_sample 500000 40 12
-
-# Teste rápido com 1M amostras e 50 árvores
-python -m app.services.model_pipeline.train_model_sample 1000000 50 12
-
