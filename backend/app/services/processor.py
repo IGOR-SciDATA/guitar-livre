@@ -84,7 +84,7 @@ def process_song(youtube_url: str, song_folder: str):
     ydl_opts = {
         "format": (
             "bestvideo[height<=480][ext=mp4]+bestaudio[ext=m4a]/"
-            "bestvideo[height<=480]+bestaudio/ "
+            "bestvideo[height<=480]+bestaudio/"
             "best[height<=480][ext=mp4]/"
             "best[height<=480]/best"
         ),
@@ -92,25 +92,28 @@ def process_song(youtube_url: str, song_folder: str):
         "outtmpl": output_template,
         "noplaylist": True,
         "force_ipv4": True,
-        "extractor_args": {
-            "youtube": {}
-        },
+
+        # Componentes JavaScript do YouTube
         "remote_components": ["ejs:github"],
         "js_runtimes": {"deno": {}},
+
         "nocheckcertificate": True,
         "quiet": False,
         "no_warnings": False,
+
         "retries": 5,
         "fragment_retries": 5,
         "continuedl": True,
         "overwrites": True,
         "concurrent_fragment_downloads": 1,
+
         "http_headers": {
             "User-Agent": (
                 "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
                 "AppleWebKit/537.36 (KHTML, like Gecko) "
                 "Chrome/151.0.0.0 Safari/537.36"
-            )
+            ),
+            "Accept-Language": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
         },
     }
 
