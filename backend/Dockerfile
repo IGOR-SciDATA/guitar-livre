@@ -11,6 +11,7 @@ RUN apt-get update \
         chromium \
         chromium-driver \
         curl \
+	unzip \
         ca-certificates \
         fonts-liberation \
         libnss3 \
