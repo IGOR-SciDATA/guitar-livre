@@ -19,7 +19,6 @@ backend/storage/songs/*
 !backend/storage/songs/.gitkeep
 backend/downloads/
 backend/downloads_test/
-*.mp4
 *.mp3
 *.ogg
 *.opus
