@@ -1,21 +1,145 @@
-MIT License
+GUITAR LIVRE
+NON-COMMERCIAL / COMMERCIAL PARTICIPATION LICENSE
 
-Copyright (c) 2026 Igor Santos - Guitar Livre
+Copyright (c) 2026 Igor Santos Seferino
+Guitar Livre
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+1. DEFINITIONS
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+"Software" means the Guitar Livre source code, object code, documentation,
+assets, interfaces, algorithms, systems and other materials distributed
+together with this license.
+
+"Author" means Igor Santos Seferino, creator and copyright holder of Guitar Livre.
+
+"Commercial Use" means any use of the Software, in whole or in part, intended
+to generate revenue, profit, commercial advantage, monetary compensation,
+subscriptions, advertising revenue, sponsorship revenue, licensing revenue,
+sales or any other form of financial benefit.
+
+2. PERSONAL AND NON-COMMERCIAL USE
+
+Permission is granted to any person to obtain, inspect, study, copy, modify
+and use the Software for personal, educational, experimental and other
+non-commercial purposes.
+
+This permission does not transfer ownership of the Software.
+
+3. COMMERCIAL USE
+
+Commercial use of Guitar Livre, whether directly or indirectly, is not
+permitted without prior written authorization from the Author.
+
+No person, company, organization or other entity may independently:
+
+- sell Guitar Livre or a substantially derived version of it;
+- operate a commercial service based substantially on Guitar Livre;
+- monetize Guitar Livre through subscriptions, advertising, sponsorships,
+  paid access or similar mechanisms;
+- sublicense or commercially license Guitar Livre;
+- use Guitar Livre as the basis of a commercial product or service;
+
+without a prior written agreement with the Author.
+
+4. COMMERCIAL PARTNERSHIP
+
+The Author may authorize commercial exploitation of Guitar Livre through a
+separate written agreement.
+
+Such agreement may establish the participation of the Author in the
+commercial activity and the distribution of revenue or profits between the
+parties.
+
+Unless otherwise expressly agreed in writing, no commercial use is
+authorized merely by obtaining or modifying the Software.
+
+The maximum participation of the Author in profits arising from an authorized
+commercial exploitation may be established at up to fifty percent (50%),
+according to the specific agreement between the parties.
+
+This license itself does not establish a mandatory percentage of revenue or
+profits. Any commercial participation, ownership, revenue sharing or profit
+sharing must be defined in a separate written agreement.
+
+5. MODIFICATION AND DERIVATIVE WORKS
+
+Users may modify the Software for permitted non-commercial purposes.
+
+Derivative works based substantially on Guitar Livre remain subject to the
+commercial restrictions established by this license.
+
+Removing, replacing or modifying the name "Guitar Livre" does not remove
+these restrictions when the derivative work substantially incorporates the
+Software.
+
+6. REDISTRIBUTION
+
+The Software may be copied and redistributed for non-commercial purposes,
+provided that:
+
+- this license is included with the redistributed Software;
+- the original copyright notice is preserved;
+- the identity of the original Author is not falsely represented;
+- recipients are informed of the restrictions on commercial use.
+
+Commercial redistribution requires prior written authorization from the
+Author.
+
+7. OWNERSHIP
+
+All copyrights and intellectual property rights in the original Guitar Livre
+Software remain with Igor Santos, except for third-party components,
+libraries, assets, music, charts or other materials that are subject to their
+own licenses or rights.
+
+Nothing in this license transfers ownership of Guitar Livre to any other
+person or entity.
+
+8. THIRD-PARTY CONTENT
+
+This license applies only to the Guitar Livre software and original materials
+owned by the Author.
+
+Music, videos, charts, artwork, libraries, frameworks, trademarks and other
+third-party materials may be subject to separate copyrights, licenses and
+terms.
+
+Users are responsible for ensuring that their use of third-party content is
+authorized.
+
+9. TRADEMARKS
+
+The name "Guitar Livre" and associated branding may not be used in a manner
+that falsely suggests endorsement, sponsorship, partnership or official
+authorization by the Author.
+
+10. NO WARRANTY
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+
+IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
+OR OTHER DEALINGS IN THE SOFTWARE.
+
+11. VIOLATION
+
+Any use of the Software that violates the restrictions established by this
+license is unauthorized and constitutes a violation of the rights granted
+under this license.
+
+Permission for non-commercial use may be terminated upon violation of these
+terms.
+
+12. CONTACT
+
+For commercial licensing, partnerships, monetization or other commercial
+arrangements concerning Guitar Livre, authorization must be obtained from:
+
+Igor Santos Seferino
+Creator and Copyright Holder of Guitar Livre
+
+Copyright (c) 2026 Igor Santos Seferino
+All rights reserved except for the permissions expressly granted by this
+license.
