@@ -24,7 +24,7 @@ function SongLibrary({ onBack, onPlaySong }) {
   useEffect(() => {
     const fetchSongs = async () => {
       try {
-        const response = await fetch(`${API_URL}/api/songs");
+        const response = await fetch(`${API_URL}/api/songs`);
         if (!response.ok) {
           throw new Error("Falha ao carregar músicas");
         }

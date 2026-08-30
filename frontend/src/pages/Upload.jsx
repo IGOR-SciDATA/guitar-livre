@@ -68,7 +68,7 @@ function Upload({ onBack }) {
       }
 
       try {
-        const response = await fetch(`${API_URL}/api/songs");
+        const response = await fetch(`${API_URL}/api/songs`);
         if (!response.ok) throw new Error("Erro ao verificar status");
 
         const songs = await response.json();
