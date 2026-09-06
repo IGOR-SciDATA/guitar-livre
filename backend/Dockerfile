@@ -35,7 +35,7 @@ RUN curl -fsSL https://deno.land/install.sh | sh \
 # BGUTIL PO TOKEN PROVIDER
 # ============================================================
 # Versão fixa para manter o plugin e o provider compatíveis.
-ENV BGUTIL_VERSION=1.3.1
+ENV BGUTIL_VERSION=1.3.2
 ENV BGUTIL_HOME=/opt/bgutil-ytdlp-pot-provider
 
 RUN git clone --depth 1 \
