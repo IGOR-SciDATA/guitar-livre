@@ -1,4 +1,5 @@
-# 🎸 Guitar Livre
+<img width="615" height="306" alt="logo" src="https://github.com/user-attachments/assets/58061b19-1bd6-4222-a926-37d86615e626" />
+
 
 > Um jogo de ritmo inspirado em Guitar Hero e Clone Hero, desenvolvido para rodar diretamente no navegador.
 
