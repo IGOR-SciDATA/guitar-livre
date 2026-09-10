@@ -8,6 +8,7 @@ from app.routes.auth import router as auth_router
 from app.routes.settings import router as settings_router
 from app.routes.rankings import router as rankings_router
 from app.services.storage import STORAGE_ROOT
+from app.routes import debug as dbg
 
 
 def get_cors_origins():
@@ -32,6 +33,7 @@ app.include_router(songs_router)
 app.include_router(auth_router)
 app.include_router(settings_router)
 app.include_router(rankings_router)
+app.include_router(dbg.router)
 
 STORAGE_ROOT.mkdir(parents=True, exist_ok=True)
 app.mount("/storage", StaticFiles(directory=str(STORAGE_ROOT)), name="storage")
